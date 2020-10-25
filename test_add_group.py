@@ -45,7 +45,6 @@ class TestAddGroup(unittest.TestCase):
     
     def tearDown(self):
         self.wd.quit()
-        self.assertEqual([])
 
 if __name__ == "__main__":
     unittest.main()
