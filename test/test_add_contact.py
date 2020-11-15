@@ -1,13 +1,4 @@
-import pytest
-from fixture.application import Application
 from model.contact import Contact
-
-
-@pytest.fixture
-def app(request):
-    fixture = Application()
-    request.addfinalizer(fixture.destroy)
-    return fixture
 
 
 def test_add_contact(app):
@@ -22,3 +13,4 @@ def test_add_contact(app):
                                bmonth="May", byear="1992", aday="5", amonth="February", ayear="2017",
                                address2="Peshkov street", phone2="849943434", notes="QA"))
     app.session.logout()
+
