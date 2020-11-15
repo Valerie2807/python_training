@@ -1,3 +1,4 @@
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
 
@@ -5,7 +6,7 @@ class ContactHelper:
     def __init__(self, app):
         self.app = app
 
-    def go_to_contact_page(self):
+    def go_to_home_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("home page").click()
 
@@ -70,4 +71,13 @@ class ContactHelper:
         wd.find_element_by_name("theform").click()
         # submit group creation
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
-        self.go_to_contact_page()
+        self.go_to_home_page()
+
+    def delete_first_contact(self):
+        wd = self.app.wd
+        # select first group
+        wd.find_element_by_name("selected[]").click()
+        # delete group
+        wd.find_element(By.XPATH, "//input[@value='Delete']").click()
+        wd.switch_to_alert().accept()
+        wd.find_element(By.CSS_SELECTOR, "div.msgbox")
