@@ -11,7 +11,7 @@ def app(request):
 
 
 def test_add_contact(app):
-    app.login(username="admin", password="secret")
+    app.session.login(username="admin", password="secret")
     app.create_contact(Contact(firstname="Ivan", middlename="Ivanovich", lastname="Ivanov", nickname="Belka",
                                         title="Blabla", company="Romashka", address="Prospect Mira, 12",
                                         home="789812878",
@@ -21,4 +21,4 @@ def test_add_contact(app):
                                         bday="4",
                                         bmonth="May", byear="1992", aday="5", amonth="February", ayear="2017",
                                         address2="Peshkov street", phone2="849943434", notes="QA"))
-    app.logout()
+    app.session.logout()
