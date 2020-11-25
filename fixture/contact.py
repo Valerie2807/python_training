@@ -6,9 +6,11 @@ class ContactHelper:
     def __init__(self, app):
         self.app = app
 
-    def go_to_home_page(self):
+    def open_home_page(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home page").click()
+        if not (wd.current_url.endswith("/index.php") and
+                len(wd.find_elements(By.XPATH, "//form[2]/div[1]/input")) > 0):
+            wd.find_element_by_link_text("home page").click()
 
     def create(self, contact):
         wd = self.app.wd
@@ -16,7 +18,7 @@ class ContactHelper:
         self.fill_contact_form(contact)
         wd.find_element_by_name("theform").click()
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
-        self.go_to_home_page()
+        self.open_home_page()
 
     def select_day(self, add_day, number):
         wd = self.app.wd
@@ -65,10 +67,12 @@ class ContactHelper:
 
     def delete_first_contact(self):
         wd = self.app.wd
+        self.open_home_page()
         self.select_first_contact()
         wd.find_element(By.XPATH, "//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
         wd.find_element(By.CSS_SELECTOR, "div.msgbox")
+        self.open_home_page()
 
     def select_first_contact(self):
         wd = self.app.wd
@@ -76,11 +80,12 @@ class ContactHelper:
 
     def modify_first_contact(self, new_contact_data):
         wd = self.app.wd
+        self.open_home_page()
         self.select_first_contact()
         wd.find_element(By.XPATH, "//tbody/tr[2]/td[8]/a").click()
         self.fill_contact_form(new_contact_data)
         wd.find_element_by_name("update").click()
-        self.go_to_home_page()
+        self.open_home_page()
 
     def count(self):
         wd = self.app.wd
