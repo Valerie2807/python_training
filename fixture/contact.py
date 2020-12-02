@@ -101,6 +101,7 @@ class ContactHelper:
             id = elements.find_element(By.NAME, "selected[]").get_attribute("value")
             last_text = element[1].text
             first_text = element[2].text
-            contact.append(Contact(lastname=last_text, firstname=first_text, id=id))
+            address = element[3].text
+            contact.append(Contact(lastname=last_text, firstname=first_text, id=id, address=address))
         return list(contact)
 
