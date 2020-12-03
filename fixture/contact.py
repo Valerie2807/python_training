@@ -20,6 +20,7 @@ class ContactHelper:
         wd.find_element_by_name("theform").click()
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
         self.open_home_page()
+        self.contact_cashe = None
 
     def select_day(self, add_day, number):
         wd = self.app.wd
@@ -73,6 +74,7 @@ class ContactHelper:
         wd.find_element(By.XPATH, "//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
         wd.find_element(By.CSS_SELECTOR, "div.msgbox")
+        self.contact_cashe = None
 
     def select_first_contact(self):
         wd = self.app.wd
@@ -86,6 +88,7 @@ class ContactHelper:
         self.fill_contact_form(new_contact_data)
         wd.find_element_by_name("update").click()
         self.open_home_page()
+        self.contact_cashe = None
 
     def count(self):
         wd = self.app.wd
