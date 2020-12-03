@@ -92,16 +92,18 @@ class ContactHelper:
         self.open_home_page()
         return len(wd.find_elements(By.NAME, "selected[]"))
 
-    def get_contact_list(self):
-        wd = self.app.wd
-        self.open_home_page()
-        contact = []
-        for elements in wd.find_elements(By.NAME, "entry"):
-            element = elements.find_elements(By.TAG_NAME, "td")
-            id = elements.find_element(By.NAME, "selected[]").get_attribute("value")
-            last_text = element[1].text
-            first_text = element[2].text
-            address = element[3].text
-            contact.append(Contact(lastname=last_text, firstname=first_text, id=id, address=address))
-        return list(contact)
+    contact_cashe = None
 
+    def get_contact_list(self):
+        if self.contact_cashe is None:
+            wd = self.app.wd
+            self.open_home_page()
+            self.contact_cashe = []
+            for elements in wd.find_elements(By.NAME, "entry"):
+                element = elements.find_elements(By.TAG_NAME, "td")
+                id = elements.find_element(By.NAME, "selected[]").get_attribute("value")
+                last_text = element[1].text
+                first_text = element[2].text
+                address = element[3].text
+                self.contact_cashe.append(Contact(lastname=last_text, firstname=first_text, id=id, address=address))
+        return list(self.contact_cashe)
