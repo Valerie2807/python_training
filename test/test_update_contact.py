@@ -18,12 +18,11 @@ def test_modify_contact_name_company(app):
     index = randrange(len(old_contact))
     modify_contact = Contact(firstname="Elon", lastname="Mask", company="Google")
     modify_contact.id = old_contact[index].id
-    app.contact.modify_group_by_index(index, modify_contact)
+    app.contact.modify_contact_by_index(index, modify_contact)
     assert len(old_contact) == app.contact.count()
     new_contact = app.contact.get_contact_list()
     old_contact[index] = modify_contact
     assert sorted(old_contact, key=Contact.id_or_max) == sorted(new_contact, key=Contact.id_or_max)
-
 
 # def test_modify_contact_address(app):
 #     if app.contact.count() == 0:

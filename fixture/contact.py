@@ -75,7 +75,9 @@ class ContactHelper:
         self.open_home_page()
         self.select_contact_by_index(index)
         wd.find_element(By.XPATH, "//input[@value='Delete']").click()
-        wd.switch_to_alert().accept()
+        # wd.switch_to_alert().accept()
+        alert = wd.switch_to.alert
+        alert.accept()
         wd.find_element(By.CSS_SELECTOR, "div.msgbox")
         self.open_home_page()
         self.contact_cashe = None
@@ -93,9 +95,11 @@ class ContactHelper:
 
     def modify_contact_by_index(self, index, new_contact_data):
         wd = self.app.wd
-        self.open_home_page()
         self.select_contact_by_index(index)
-        wd.find_element(By.XPATH, "//tbody/tr[2]/td[8]/a").click()
+        choose_contact = wd.find_elements_by_name("entry")[index]
+        element = choose_contact.find_elements_by_tag_name("td")[7]
+        element.find_element_by_tag_name("a").click()
+        # wd.find_element(By.XPATH, "//tbody/tr[2]/td[8]/a").click()
         self.fill_contact_form(new_contact_data)
         wd.find_element_by_name("update").click()
         self.open_home_page()
