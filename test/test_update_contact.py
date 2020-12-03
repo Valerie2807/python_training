@@ -1,3 +1,5 @@
+from random import randrange
+
 from model.contact import Contact
 
 
@@ -13,12 +15,13 @@ def test_modify_contact_name_company(app):
                                bmonth="May", byear="1992", aday="5", amonth="February", ayear="2017",
                                address2="Peshkov street", phone2="849943434", notes="QA"))
     old_contact = app.contact.get_contact_list()
+    index = randrange(len(old_contact))
     modify_contact = Contact(firstname="Elon", lastname="Mask", company="Google")
-    modify_contact.id = old_contact[0].id
-    app.contact.modify_first_contact(modify_contact)
+    modify_contact.id = old_contact[index].id
+    app.contact.modify_group_by_index(index, modify_contact)
     assert len(old_contact) == app.contact.count()
     new_contact = app.contact.get_contact_list()
-    old_contact[0] = modify_contact
+    old_contact[index] = modify_contact
     assert sorted(old_contact, key=Contact.id_or_max) == sorted(new_contact, key=Contact.id_or_max)
 
 

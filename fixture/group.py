@@ -62,6 +62,7 @@ class GroupHelper:
 
     def select_group_by_index(self, index):
         wd = self.app.wd
+        self.open_groups_page()
         wd.find_elements_by_name("selected[]")[index].click()
 
     def open_groups_page(self):
