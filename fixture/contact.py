@@ -11,7 +11,7 @@ class ContactHelper:
         wd = self.app.wd
         if not (wd.current_url.endswith("/index.php") and
                 len(wd.find_elements(By.XPATH, "//form[2]/div[1]/input")) > 0):
-            wd.find_element_by_link_text("home page").click()
+            wd.find_element_by_link_text("home").click()
 
     def create(self, contact):
         wd = self.app.wd
