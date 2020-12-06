@@ -125,10 +125,9 @@ class ContactHelper:
                 last_text = element[1].text
                 first_text = element[2].text
                 address = element[3].text
-                all_phones = element[5].text.splitlines()
+                all_phones = element[5].text
                 self.contact_cashe.append(Contact(lastname=last_text, firstname=first_text,
-                                                  id=id, address=address, home=all_phones[0], mobile=all_phones[1],
-                                                  work=all_phones[2], phone2=all_phones[3]))
+                                                  all_phones_from_home_page=all_phones, id=id, address=address))
         return list(self.contact_cashe)
 
     def open_contact_to_edit_by_index(self, index):
