@@ -125,9 +125,11 @@ class ContactHelper:
                 last_text = element[1].text
                 first_text = element[2].text
                 address = element[3].text
+                all_email = element[4].text
                 all_phones = element[5].text
                 self.contact_cashe.append(Contact(lastname=last_text, firstname=first_text,
-                                                  all_phones_from_home_page=all_phones, id=id, address=address))
+                                                  all_phones_from_home_page=all_phones, id=id, address=address,
+                                                  all_email_from_home_page=all_email))
         return list(self.contact_cashe)
 
     def open_contact_to_edit_by_index(self, index):
@@ -149,13 +151,17 @@ class ContactHelper:
         self.open_contact_to_edit_by_index(index)
         firstname = wd.find_element_by_name("firstname").get_attribute("value")
         lastname = wd.find_element_by_name("lastname").get_attribute("value")
+        address = wd.find_element(By.NAME, "address").text
+        email = wd.find_element(By.NAME, "email").get_attribute("value")
+        email2 = wd.find_element(By.NAME, "email2").get_attribute("value")
+        email3 = wd.find_element(By.NAME, "email3").get_attribute("value")
         home = wd.find_element_by_name("home").get_attribute("value")
         work = wd.find_element_by_name("work").get_attribute("value")
         mobile = wd.find_element_by_name("mobile").get_attribute("value")
         phone2 = wd.find_element_by_name("phone2").get_attribute("value")
         id = wd.find_element(By.NAME, "id").get_attribute("value")
-        return Contact(firstname=firstname, lastname=lastname, id=id,
-                       home=home, work=work, mobile=mobile, phone2=phone2)
+        return Contact(firstname=firstname, lastname=lastname, id=id, address=address, email=email, email2=email2,
+                          email3=email3,home=home, work=work, mobile=mobile, phone2=phone2)
 
     def get_contact_from_view_page(self, index):
         wd = self.app.wd
