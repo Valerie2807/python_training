@@ -34,7 +34,7 @@ def clear(s):
     return re.sub('[() -]', "", s)
 
 
-# еще раз повторить как работает
+# еще раз повторить как работает функция
 def merge_phones_like_on_home_page(contact):
     return "\n".join(filter(lambda x: x != "",
                             (map(lambda x: clear(x),
