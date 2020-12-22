@@ -22,23 +22,25 @@ def load_config(file):
 @pytest.fixture
 def app(request):
     global fixture
-    global target
     browser = request.config.getoption("--browser")
-    web_config =load_config(request.config.getoption("--target"))["web"]
+    web_config = load_config(request.config.getoption("--target"))["web"]
     if fixture is None or not fixture.is_valid():
         fixture = Application(browser=browser, base_url=web_config["baseUrl"])
     fixture.session.ensure_login(username=web_config["username"], password=web_config["password"])
     return fixture
 
+
 @pytest.fixture(scope="session")
 def db(request):
-    db_config =load_config(request.config.getoption("--target"))["db"]
-    dbfixture= DbFixture(host=db_config["host"], name=db_config["name"],
-                         user=db_config["user"],password=db_config["password"])
+    db_config = load_config(request.config.getoption("--target"))["db"]
+    dbfixture = DbFixture(host=db_config["host"], name=db_config["name"],
+                          user=db_config['user'], password=db_config['password'])
+
     def fin():
         dbfixture.destroy()
     request.addfinalizer(fin)
-    return DbFixture
+    return dbfixture
+
 
 @pytest.fixture(scope="session", autouse=True)
 def stop(request):
@@ -87,7 +89,3 @@ def load_from_module_contacts(module):
 def load_from_json_contacts(file):
     with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "data/%s.json" % file)) as f:
         return jsonpickle.decode(f.read())
-
-
-
-

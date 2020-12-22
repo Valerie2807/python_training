@@ -5,7 +5,7 @@
     "password": "secret"
 
   },
-  "bd": {
+  "db": {
     "host": "localhost",
     "name": "addressbook",
     "user": "root",
