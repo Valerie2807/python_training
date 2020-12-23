@@ -6,6 +6,8 @@ import pytest
 import json
 import os.path
 
+from fixture.orm import ORMFixture
+
 fixture = None
 target = None
 
@@ -42,6 +44,13 @@ def db(request):
     return dbfixture
 
 
+@pytest.fixture(scope="session")
+def orm(request):
+    db_config = load_config(request.config.getoption("--target"))['db']
+    ormfixture = ORMFixture(host=db_config['host'], name=db_config['name'], user=db_config['user'],
+                          password=db_config['password'])
+
+    return ormfixture
 @pytest.fixture(scope="session", autouse=True)
 def stop(request):
     def fin():

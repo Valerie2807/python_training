@@ -211,3 +211,20 @@ class ContactHelper:
         phone2 = re.search("P: (.*)", text).group(1)
         return Contact(home=home, mobile=mobile, work=work, phone2=phone2)
 
+    def add_contact_to_group_by_id(self, contact_id, group_id, group_name):
+        wd = self.app.wd
+        self.open_home_page()
+        self.select_contact_by_id(contact_id)
+        wd.find_element(By.NAME, "to_group").click()
+        wd.find_element(By.XPATH, "(//option[@value=%s])[2]" % group_id).click()
+        wd.find_element(By.NAME, "add").click()
+        wd.find_element(By.LINK_TEXT, 'group page "%s"' % group_name).click()
+    
+    def delete_contact_from_group(self, group_id, contact_id):
+        wd = self.app.wd
+        self.open_home_page()
+        wd.find_element(By.NAME, "group").click()
+        wd.find_element(By.XPATH, "//option[@value=%s]" % group_id).click()
+        self.select_contact_by_id(contact_id)
+        wd.find_element(By.NAME, "remove").click()
+        wd.find_element(By.CSS_SELECTOR, "div.msgbox")
