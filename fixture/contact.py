@@ -83,6 +83,20 @@ class ContactHelper:
         self.open_home_page()
         self.contact_cashe = None
 
+    def delete_contact_by_id(self, id):
+        wd = self.app.wd
+        self.open_home_page()
+        self.select_contact_by_id(id)
+        self.button_delete_click()
+        wd.switch_to_alert().accept()
+        wd.find_element(By.CSS_SELECTOR, "div.msgbox")
+        self.open_home_page()
+        self.contact_cashe = None
+    
+    def button_delete_click(self):
+        wd = self.app.wd
+        wd.find_element(By.XPATH, "//input[@value='Delete']").click()
+    
     def select_first_contact(self):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
@@ -90,6 +104,10 @@ class ContactHelper:
     def select_contact_by_index(self, index):
         wd = self.app.wd
         wd.find_elements_by_name("selected[]")[index].click()
+
+    def select_contact_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element(By.CSS_SELECTOR, "input[value='%s']" % id).click()
 
     def modify_first_contact(self):
         self.modify_contact_by_index(0)
@@ -105,6 +123,19 @@ class ContactHelper:
         wd.find_element_by_name("update").click()
         self.open_home_page()
         self.contact_cashe = None
+
+    def modify_contact_by_id(self, id, new_contact_form):
+        wd = self.app.wd
+        self.open_home_page()
+        self.open_contact_to_edit_by_id(id)
+        self.fill_contact_form(new_contact_form)
+        self.button_update_click()
+        self.open_home_page()
+        self.contact_cashe = None
+
+    def button_update_click(self):
+        wd = self.app.wd
+        wd.find_element(By.XPATH, "//form[1]/input[22]").click()
 
     def count(self):
         wd = self.app.wd
@@ -145,6 +176,13 @@ class ContactHelper:
         row = wd.find_elements(By.NAME, "entry")[index]
         cell = row.find_elements_by_tag_name("td")[6]
         cell.find_element_by_tag_name("a").click()
+
+    def open_contact_to_edit_by_id(self, id):
+        wd = self.app.wd
+        self.open_home_page()
+        wd.find_element(By.CSS_SELECTOR, "input[value='%s']" % id)
+        cells = wd.find_elements(By.TAG_NAME, "td")[7]
+        cells.find_element(By.TAG_NAME, "a").click()
 
     def get_contact_info_from_edit_page(self, index):
         wd = self.app.wd
