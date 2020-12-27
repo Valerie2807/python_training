@@ -1,17 +1,16 @@
 from model.contact import Contact
 
-
 contact_data = [
-    Contact(first_name="Victor", middle_name="Ivan", last_name="Petrov", nick_name="Fox140", tittle="test",
-               company="testcompany", address1="Moscow", home_phone="8(495)2154536", mobile_phone="+79168956384",
-               work_phone="8-499-9576135", fax="85663654556", email1="testemail1@facegmail.com",
-               email2="testemail2@facegmail.com", email3="testemail3@facegmail.com",homepage="testhomepage.ru",
-               bday="14", bmonth="August", byear="1987", aday="24", amonth="October", ayear="2014",
-               address2="Moscow, Lenina 2",phone2="8 456 9535956", notes="Test Moscow information"),
-    Contact(first_name="Gena", middle_name="Kolya", last_name="Smirnov", nick_name="lis144", tittle="testtittle",
-               company="testcompany34", address1="Vladimir", home_phone="8(495)4267896", mobile_phone="+79162659698",
-               work_phone="8-499-2456247", fax="56575963526", email1="teste23mail1@facegmail.com",
-               email2="testemail2456@facegmail.com", email3="testemail3453@facegmail.com", homepage="testhomepage4.ru",
-               bday="15", bmonth="August", byear="1988", aday="25", amonth="October", ayear="2012",
-               address2="Omsk, Lenina 2",phone2="8 456 9535956", notes="Test Omsk information")
+    Contact(firstname="Ivan", middlename="Ivan", lastname="Ivanov", nickname="Fox140", title="QA",
+            company="Romashka", address="Moscow", home="8(495)2154536", mobile="+79168956384",
+            work="8-499-9576135", fax="85663654556", email="jhggjhg@gmail.com",
+            email2="ffgh@mail.ru", email3="yggh@yandex.ru", homepage="testhomepage.ru",
+            bday="14", bmonth="August", byear="1987", aday="24", amonth="October", ayear="2014",
+            address2="Moscow, Peshkov street 8", phone2="8 466 9536656", notes="QA"),
+    Contact(firstname="Test", middlename="Test", lastname="Test", nickname="test1", title="title",
+            company="testcompany", address="test", home="8(495)4267896", mobile="+79162659698",
+            work="8-499-2456247", fax="56575963526", email="test2@gmail.com",
+            email2="test6@gmail.com", email3="test3@gmail.com", homepage="www.google.com",
+            bday="15", bmonth="August", byear="1988", aday="25", amonth="October", ayear="2012",
+            address2="Moscow, Peshkov street 7", phone2="8 456 9535956", notes="Test Omsk information")
 ]
