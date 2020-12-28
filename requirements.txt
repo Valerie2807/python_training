@@ -4,4 +4,6 @@ selenium
 jsonpickle
 pony
 pymysql
+lxml
+pytest-allure-adapter
 
