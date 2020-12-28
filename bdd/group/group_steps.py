@@ -58,11 +58,11 @@ def verify_group_dell(db, non_empty_group_list, random_group, app, check_ui):
 
 @when('I edit the group from the list')
 def edit_group(app, random_group):
-    app.group.edit_group_by_id(random_group.id, random_group)
+    app.group.modify_group_by_id(random_group.id, random_group)
 
 
 @then('the new group list is equal to the old list without the edit group')
-def verify_group_dell(db, non_empty_group_list, app, check_ui):
+def verify_group_delete(db, non_empty_group_list, app, check_ui):
     old_groups = non_empty_group_list
     assert len(old_groups) == app.group.count()
     new_groups = db.get_group_list()
