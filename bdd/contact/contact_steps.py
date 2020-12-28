@@ -10,7 +10,7 @@ def contact_list(db):
 
 @given('a contact', target_fixture="new_contact")
 def new_contact():
-    return (Contact("Fox", "J.", "Mulder", "Spooky","Special Agent", "FBI", "Alexandria, Virginia",
+    return (Contact("Fox", "J.", "Mulder", "Spooky", "Special Agent", "FBI", "Alexandria, Virginia",
                     "1(011)3456789", "+01190008432", "8-499-9576135", "No",
                     "spooky@fbi.com", "spookytest@fbi.com", "spookysuper@fbi.com",
                     "google.com", "13", "October", "1961", "13",
@@ -32,14 +32,17 @@ def verify_contact_added(db, contact_list, new_contact):
     assert sorted(new_contacts, key=Contact.id_or_max) == sorted(old_contacts, key=Contact.id_or_max)
 
 
-@given('a non-empty conatc list', target_fixture="non_empty_contact_list")
+@given('a non-empty contact list', target_fixture="non_empty_contact_list")
 def non_empty_contact_list(app, db):
     if len(db.get_contact_list()) == 0:
         app.contact.create(
-            Contact("name", "middle", "lastname", "nickname", "title", "company", "address", "89067223233",
-                    "89067223234", "89067223235", "email1", "email2", "email3", "1", "May", "1992", "1",
-                    "May", "2022", "Address", "Home", "Notes"))
-    return db.get_contact_list
+            Contact("Fox", "J.", "Mulder", "Spooky", "Special Agent", "FBI", "Alexandria, Virginia",
+                    "1(011)3456789", "+01190008432", "8-499-9576135", "No",
+                    "spooky@fbi.com", "spookytest@fbi.com", "spookysuper@fbi.com",
+                    "google.com", "13", "October", "1961", "13",
+                    "October", "2021", "Ap. 42, 2630 Hegal Place",
+                    "8 011 0002121", "The truth is out there"))
+    return db.get_contact_list()
 
 
 @given('a random contact from the list', target_fixture="random_contact")
@@ -49,11 +52,11 @@ def random_contact(non_empty_contact_list):
 
 @when('I delete the contact from the list')
 def delete_contact(app, random_contact):
-    app.contact.delete_conact_by_id(random_contact.id)
+    app.contact.delete_contact_by_id(random_contact.id)
 
 
 @then('the new contact list is equal to the old list without the deleted contact')
-def verify_contact_dell(db, non_empty_contact_list, random_contact, app, check_ui):
+def verify_contact_delete(db, non_empty_contact_list, random_contact, app, check_ui):
     old_contacts = non_empty_contact_list
     new_contacts = db.get_contact_list()
     assert len(old_contacts) - 1 == len(new_contacts)
