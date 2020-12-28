@@ -92,11 +92,11 @@ class ContactHelper:
         wd.find_element(By.CSS_SELECTOR, "div.msgbox")
         self.open_home_page()
         self.contact_cashe = None
-    
+
     def button_delete_click(self):
         wd = self.app.wd
         wd.find_element(By.XPATH, "//input[@value='Delete']").click()
-    
+
     def select_first_contact(self):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
@@ -198,7 +198,7 @@ class ContactHelper:
         phone2 = wd.find_element_by_name("phone2").get_attribute("value")
         id = wd.find_element(By.NAME, "id").get_attribute("value")
         return Contact(firstname=firstname, lastname=lastname, id=id, address=address, email=email, email2=email2,
-                          email3=email3,home=home, work=work, mobile=mobile, phone2=phone2)
+                       email3=email3, home=home, work=work, mobile=mobile, phone2=phone2)
 
     def get_contact_from_view_page(self, index):
         wd = self.app.wd
@@ -218,7 +218,7 @@ class ContactHelper:
         wd.find_element(By.XPATH, "(//option[@value=%s])[2]" % group_id).click()
         wd.find_element(By.NAME, "add").click()
         wd.find_element(By.LINK_TEXT, 'group page "%s"' % group_name).click()
-    
+
     def delete_contact_from_group(self, group_id, contact_id):
         wd = self.app.wd
         self.open_home_page()
