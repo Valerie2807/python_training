@@ -10,9 +10,12 @@ def contact_list(db):
 
 @given('a contact', target_fixture="new_contact")
 def new_contact():
-    return (Contact("name", "middle", "lastname", "nickname", "title", "company", "address", "89067223233",
-                    "89067223234", "89067223235", "email1", "email2", "email3", "1", "May", "1992", "1",
-                    "May", "2022", "Address", "Home", "Notes"))
+    return (Contact("Fox", "J.", "Mulder", "Spooky","Special Agent", "FBI", "Alexandria, Virginia",
+                    "1(011)3456789", "+01190008432", "8-499-9576135", "No",
+                    "spooky@fbi.com", "spookytest@fbi.com", "spookysuper@fbi.com",
+                    "google.com", "13", "October", "1961", "13",
+                    "October", "2021", "Ap. 42, 2630 Hegal Place",
+                    "8 011 0002121", "The truth is out there"))
 
 
 @when('I add the contact the list')
@@ -63,7 +66,7 @@ def verify_contact_dell(db, non_empty_contact_list, random_contact, app, check_u
 
 @when('I edit the contact from the list')
 def edit_contact(app, random_contact):
-    app.contact.edit_contact_by_id(random_contact.id, random_contact)
+    app.contact.modify_contact_by_id(random_contact.id, random_contact)
 
 
 @then('the new contact list is equal to the old list without the edit contact')
@@ -74,4 +77,4 @@ def verify_contact_delete(db, non_empty_contact_list, app, check_ui):
     assert old_contacts == new_contacts
     if check_ui:
         assert sorted(new_contacts, key=Contact.id_or_max) == sorted(app.contact.get_contact_list(),
-                                                                              key=Contact.id_or_max)
+                                                                     key=Contact.id_or_max)
