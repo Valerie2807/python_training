@@ -143,7 +143,6 @@ class ContactHelper:
         return len(wd.find_elements(By.NAME, "selected[]"))
 
     contact_cashe = None
-    # Кеширование списка контактов, сбрасывается после добавления\удаления\модификации
 
     def get_contact_list(self):
         if self.contact_cashe is None:
